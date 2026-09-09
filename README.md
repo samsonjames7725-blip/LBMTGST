@@ -1,12 +1,12 @@
 # LBMTGST — LifeBridge MedTech GST/ERP
 
-GST + ERP system for LifeBridge MedTech. **Separate codebase and repo from the
-AI Business OS** — both share the same Supabase data platform
-(`ghvjdybgllufjtdurbvh`); no second database exists or will be created.
+GST + ERP system for LifeBridge MedTech. **Separate codebase, separate repo,
+and separate Supabase project from the AI Business OS** — nothing is shared at
+the database level.
 
 - **Stack:** Next.js App Router · TypeScript · Tailwind · Supabase (Auth/Postgres/RLS) · Zod · Vercel
 - **Repo:** `samsonjames7725-blip/LBMTGST`
-- **DB:** shared with the AI Business OS; this project only ever creates `erp_`-prefixed objects (see [DATABASE.md](./DATABASE.md))
+- **DB:** this system's own Supabase project `tnobrqfxmrwpuxkdsycd` (the AI Business OS runs on its own project)
 
 ## Implementation status
 

@@ -2,7 +2,7 @@
   "name": "lbmtgst",
   "version": "0.1.0",
   "private": true,
-  "description": "LifeBridge MedTech GST/ERP system (LBMTGST) — Next.js + Supabase. Separate codebase from the AI Business OS; shares the same Supabase data platform (ghvjdybgllufjtdurbvh).",
+  "description": "LifeBridge MedTech GST/ERP system (LBMTGST) — Next.js + Supabase. Separate codebase and separate Supabase project from the AI Business OS.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

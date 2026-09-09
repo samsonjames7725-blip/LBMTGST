@@ -1,11 +1,14 @@
 # DATABASE.md — LBMTGST (LifeBridge MedTech GST/ERP)
 
-**Separate codebase from the AI Business OS. Same Supabase platform — never a second database.**
+**Separate codebase and separate Supabase project from the AI Business OS.**
 
 ```text
-Supabase project (shared): ghvjdybgllufjtdurbvh
-URL: https://ghvjdybgllufjtdurbvh.supabase.co
+Supabase project (this system): tnobrqfxmrwpuxkdsycd
+URL: https://tnobrqfxmrwpuxkdsycd.supabase.co
 ```
+
+The AI Business OS runs against its own project (`ghvjdybgllufjtdurbvh`).
+The two systems share nothing at the database level.
 
 ## File layout
 
@@ -15,22 +18,12 @@ supabase/
     └── 20260910030000_lbmtgst_stage1_erp_foundation.sql   # source of truth
 ```
 
-## Separation model
+## Naming note
 
-Two applications, one database:
-
-| | AI Business OS (`LBMT` repo / D:\LBMT) | GST/ERP (this repo / D:\LBMTGST) |
-|---|---|---|
-| Domain | CRM, leads, AI agents, knowledge | GST, billing, vendors, products, inventory |
-| Tables | unprefixed CRM/AI tables (`leads`, `customers`, …) | strictly `erp_`-prefixed tables |
-| Migrations | additive, owned by the OS project | additive, owned by this project |
-
-This project's migrations create **only** `erp_`-prefixed objects, so they can
-never collide with, alter, or drop OS-owned tables. Applying this migration is
-independent of whether the OS migration has run — there are no cross-dependencies.
-Shared-master-data consolidation (single customer/product records used by both
-apps) is a later, explicitly planned stage; until then the systems are separate
-by design.
+ERP tables carry an `erp_` prefix. On a dedicated project this is not
+required for collision safety, but it keeps every GST/ERP object instantly
+identifiable and preserves the option of co-locating with other systems
+later. Keep the prefix.
 
 ## Stage 1 migration contents
 
@@ -48,6 +41,17 @@ Every table: RLS enabled (deny-by-default), `authenticated` gets member-scoped
 SELECT only, all writes via the service role through the server-side
 authorization layer, `updated_at` triggers via a `private` helper function,
 unique constraints for GSTIN / company+SKU / company+doc_type+FY.
+
+## Applying the migration
+
+The project starts empty, so the Stage-1 migration applies cleanly:
+
+```bash
+npx supabase link --project-ref tnobrqfxmrwpuxkdsycd
+npx supabase db push
+```
+
+(or paste the migration file into the Supabase SQL editor).
 
 ## Money conventions
 

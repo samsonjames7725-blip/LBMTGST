@@ -17,8 +17,8 @@ export default function HomePage() {
     <main className="mx-auto max-w-2xl px-6 py-16">
       <h1 className="text-2xl font-semibold tracking-tight">LifeBridge MedTech — GST/ERP</h1>
       <p className="mt-2 text-sm text-slate-400">
-        Separate system from the AI Business OS. Shares the same Supabase data platform
-        (<code className="text-slate-300">ghvjdybgllufjtdurbvh</code>) — one database, two focused applications.
+        Separate system from the AI Business OS, with its own Supabase project
+        (<code className="text-slate-300">tnobrqfxmrwpuxkdsycd</code>) — one focused application per platform.
       </p>
 
       <section className="mt-8 space-y-3">
